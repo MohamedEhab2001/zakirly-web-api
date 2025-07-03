@@ -17,6 +17,7 @@ class OrderService extends Service {
     }, 0);
     const courses = this.data.items.filter(item => item.type === "course" && item?.kind === "online");
     const books = this.data.items.filter(item => item.type === "book");
+    
 
 
     const [record , transaction] = await OrderRepo.create({

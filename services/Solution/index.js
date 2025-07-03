@@ -11,6 +11,8 @@ class SolutionService extends Service {
   }
 
   async create() {
+    console.log("sdsds");
+    
     this._checkIfDataProvided(null , ["user_id" , "exam_id" , "answers"]);
     const { user_id, exam_id, answers } = this.data;
     const examServant = new ExamService(null , exam_id);
@@ -18,10 +20,7 @@ class SolutionService extends Service {
     
     if (!exam) throw new Error("Exam not found");
 
-
-
-
-    const {total , corrected} = await this.#checkIfExamIsMCQ(exam_id , answers);
+    const {total , corrected} = await this.#checkIfExamIsMCQ(exam_id , answers , exam);
 
     const solution = await SolutionRepo.create({
       user_id,
@@ -30,7 +29,12 @@ class SolutionService extends Service {
       corrected,
       exam_id
     });
-    const qaService = new QuestionsAnswerService(answers , null , solution.id);
+
+    const answersData = answers.map(ans => ({
+      ...ans,
+      solution_id: solution.id
+    }));
+    const qaService = new QuestionsAnswerService(answersData , null , solution.id);
     await qaService.bulkCreate();
     return solution;
   }
@@ -50,7 +54,7 @@ class SolutionService extends Service {
   }
 
   /**------------------------- */
-  async #checkIfExamIsMCQ(exam_id , answers) {
+  async #checkIfExamIsMCQ(exam_id , answers , exam) {
     if (exam.type !== "mcq") return {total : 0 , corrected : false};
     let total = 0;
     let corrected = true;

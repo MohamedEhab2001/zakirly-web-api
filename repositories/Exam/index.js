@@ -16,13 +16,13 @@ class ExamRepository {
   static async getAll(data) {
     const [country] = extractKeys(data,["country"])
 
-    const get = All(models , country)
+    const get = All(models , country || "eg")
     return await models.Exam.findAll({...get});
   }
 
   static async ById(id , data) {
     const [country] = extractKeys(data,["country"])
-    const get = One(models , country)
+    const get = One(models , country || "eg")
     return await models.Exam.findByPk(id , {...get});
   }
 

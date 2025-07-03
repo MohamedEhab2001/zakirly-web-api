@@ -19,6 +19,7 @@ const newsletterRoute = require("./newsletterRoute")
 const questionRoute = require("./questionRoute")
 const orderRoute = require("./orderRoute")
 const currencyRoute = require("./currencyRoute")
+const solutionRoute = require("./solutionRoute")
 
 
 module.exports = useRoutes = (app) => {
@@ -43,5 +44,6 @@ module.exports = useRoutes = (app) => {
   app.use("/questions" , questionRoute)
   app.use("/orders" , orderRoute)
   app.use("/currencies" , currencyRoute)
+  app.use("/solutions" , solutionRoute)
   console.log("Routes Defined");
 };

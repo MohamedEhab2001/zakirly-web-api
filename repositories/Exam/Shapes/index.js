@@ -60,6 +60,10 @@ const ExamQuestion = (models) => {
             {
                 model : models.Question,
                 as : "questions",
+                through : {
+                        attributes : ["id"],
+                        raw : true
+                },
                 include : [
                     {
                         model : models.Choice,
