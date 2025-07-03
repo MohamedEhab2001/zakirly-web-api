@@ -9,6 +9,12 @@ class QuestionsAnswerRepository {
     return await models.QuestionsAnswer.create(data);
   }
 
+  static async bulkCreate(data) {
+    const modelValidate = new ModelValidation(models.QuestionsAnswer);
+    modelValidate.ModelKeysValidate(data[0], []);
+    return await models.QuestionsAnswer.bulkCreate(data);
+  }
+
   static async getAll() {
     return await models.QuestionsAnswer.findAll();
   }

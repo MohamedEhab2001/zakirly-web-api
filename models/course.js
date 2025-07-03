@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     level_id: DataTypes.INTEGER,
     title: DataTypes.STRING,
     desc: DataTypes.TEXT,
-    price: DataTypes.FLOAT,
     discount: DataTypes.FLOAT,
     teacher_id: DataTypes.INTEGER,
     period: DataTypes.STRING,

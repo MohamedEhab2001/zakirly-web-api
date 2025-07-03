@@ -13,6 +13,12 @@ class QuestionsAnswerService extends Service {
     return record;
   }
 
+  async bulkCreate() {
+    this._checkIfDataProvided();
+    const record = await QuestionsAnswerRepo.bulkCreate(this.data);
+    return record;
+  }
+
   async getAll() {
     return await QuestionsAnswerRepo.getAll();
   }

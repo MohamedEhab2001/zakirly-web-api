@@ -1,4 +1,4 @@
-const All = (models) => {
+const All = (models , country) => {
     return {
         include : [
             {
@@ -9,6 +9,22 @@ const All = (models) => {
                 model : models.Level,
                 as : "level"
             },
+            {
+                model : models.Prices,
+                as : "prices",
+                include : [
+                    {
+                        model : models.Currency,
+                        as : "currency",
+                        where : {
+                            isocode : country
+                        }
+                    }
+                ],
+                where : {
+                    type : "exam",
+                }
+            }
         ],
         attributes : {
             include : [[models.sequelize.literal('(SELECT COUNT(*) FROM "ExamQuestions" WHERE "ExamQuestions"."exam_id" = "Exam"."id")'), "questions"]]
@@ -16,8 +32,8 @@ const All = (models) => {
     }
 }
 
-const One = (models) => {
-    const get = All(models)
+const One = (models , country) => {
+    const get = All(models , country)
     return {
         include : [
             ...get.include,
@@ -38,5 +54,23 @@ const One = (models) => {
     }
 }
 
+const ExamQuestion = (models) => {
+    return {
+        include : [
+            {
+                model : models.Question,
+                as : "questions",
+                include : [
+                    {
+                        model : models.Choice,
+                        as : "choices",
+                        required : false
+                    }
+                ]
+            }
+        ]
+    }
+}
 
-module.exports = {All , One}
+
+module.exports = {All , One , ExamQuestion}

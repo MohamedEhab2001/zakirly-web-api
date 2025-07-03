@@ -1,7 +1,8 @@
 
 const models = require("../../models");
 const ModelValidation = require("../../helpers/Validations/ModelValidation");
-const { All , One } = require("./Shapes");
+const { All , One, ExamQuestion } = require("./Shapes");
+const { extractKeys } = require("../../helpers/HelperMethods");
 
 class ExamRepository {
   static async create(data) {
@@ -12,13 +13,21 @@ class ExamRepository {
     return [record , transaction]
   }
 
-  static async getAll() {
-    const get = All(models)
+  static async getAll(data) {
+    const [country] = extractKeys(data,["country"])
+
+    const get = All(models , country)
     return await models.Exam.findAll({...get});
   }
 
-  static async ById(id) {
-    const get = One(models)
+  static async ById(id , data) {
+    const [country] = extractKeys(data,["country"])
+    const get = One(models , country)
+    return await models.Exam.findByPk(id , {...get});
+  }
+
+  static async ExamQuestionById(id ) {
+    const get = ExamQuestion(models)
     return await models.Exam.findByPk(id , {...get});
   }
 

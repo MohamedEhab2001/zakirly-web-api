@@ -36,6 +36,11 @@ class UserRepository {
               ]
             }
           ]
+        },
+        {
+          model: models.Solution,
+          as: "solutions",
+          required: false
         }
       ]
     });

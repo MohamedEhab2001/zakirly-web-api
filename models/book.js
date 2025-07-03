@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     cover_url: DataTypes.STRING,
     section_id: DataTypes.INTEGER,
     age_id: DataTypes.INTEGER,
-    price: DataTypes.FLOAT,
     rating: DataTypes.FLOAT,
     pages_number: DataTypes.INTEGER,
     language: DataTypes.STRING,

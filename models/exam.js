@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Exam.belongsToMany(models.Question , {foreignKey : "exam_id" , as : "questions" , through : "ExamQuestion"})
       Exam.hasMany(models.ExamPrerequest , {foreignKey : "exam_id" , as : "prerequests"})
       Exam.hasMany(models.ExamInstruction , {foreignKey : "exam_id" , as : "instructions"})
+      Exam.hasMany(models.Prices, { foreignKey: "entity_id", as: "prices"});
     }
   }
   Exam.init({

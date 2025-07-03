@@ -16,7 +16,12 @@ module.exports = (sequelize, DataTypes) => {
   Solution.init({
     user_id: DataTypes.INTEGER,
     total: DataTypes.FLOAT,
-    attempts_number: DataTypes.INTEGER
+    attempts_number: DataTypes.INTEGER,
+    corrected: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'Solution',

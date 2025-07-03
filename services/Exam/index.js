@@ -4,6 +4,7 @@ const ExamRepo = require("../../repositories/Exam");
 const ExamInstructionService = require("../ExamInstruction");
 const ExamPrerequestService = require("../ExamPrerequest");
 const ExamQuestionService = require("../ExamQuestion");
+const PricesService = require("../Prices");
 class ExamService extends Service {
   constructor(data = null, id = null) {
     super(data, id);
@@ -29,6 +30,12 @@ class ExamService extends Service {
       exam_id:record.id
     }))
 
+    const prices = this.data.prices.map(price => ({
+      ...price,
+      entity_id:record.id,
+      entity_type:"exam"
+    }))
+
     const examIns = new ExamInstructionService(instructions , null , transaction);
     await examIns.bulkCreate();
 
@@ -37,6 +44,10 @@ class ExamService extends Service {
 
     const examQues = new ExamQuestionService(questions , null , transaction);
     await examQues.bulkCreate();
+
+    const pricesService = new PricesService(prices , null , transaction);
+    await pricesService.bulkCreate();  
+    
     
     await transaction.commit();
     
@@ -45,17 +56,33 @@ class ExamService extends Service {
   }
 
   async getAll() {
-    return await ExamRepo.getAll();
+    return await ExamRepo.getAll(this.data);
   }
 
   async getById() {
-    return await ExamRepo.ById(this.id);
+    return await ExamRepo.ById(this.id , this.data);
   }
 
   async update() {
     this._checkIfDataProvided();
     this._checkIfIdProvided();
     return await ExamRepo.update(this.id, this.data);
+  }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await ExamRepo.delete(this.id);
+  }
+
+  async addPriceToExam() {
+    this._checkIfDataProvided();
+    this._checkIfIdProvided();
+    const pricesService = new PricesService({...this.data , entity_id : this.id , type : "exam"});
+    await pricesService.create();
+  }
+
+  async getExamQuestionById() {
+    return await ExamRepo.ExamQuestionById(this.id);
   }
 }
 

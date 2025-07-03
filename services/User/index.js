@@ -52,6 +52,12 @@ class UserService extends Service {
       delete student.__v;
       user.dataValues.dashboard = student;
     }
+    if (user.solutions && user.solutions.length > 0) {
+      const total = user.solutions.reduce((sum, s) => sum + (s.total || 0), 0);
+      user.dataValues.average_score = total / user.solutions.length;
+    } else {
+      user.dataValues.average_score = null;
+    }
     return user;
   }
 
