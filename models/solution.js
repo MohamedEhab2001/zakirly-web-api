@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Solution.belongsTo(models.User , {foreignKey : "user_id" , as : "user"})
+      Solution.belongsTo(models.Exam , {foreignKey : "exam_id" , as : "exam"})
     }
   }
   Solution.init({
@@ -21,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    }
+    },
+    exam_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Solution',

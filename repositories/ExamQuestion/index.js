@@ -16,8 +16,8 @@ class ExamQuestionRepository {
     return await models.ExamQuestion.bulkCreate(data , {transaction});
   }
 
-  static async getAll() {
-    return await models.ExamQuestion.findAll();
+  static async getAll(data) {
+    return await models.ExamQuestion.findAll({where : data , attributes : ["id" , "question_id" , "exam_id"]});
   }
 
   static async ById(id) {

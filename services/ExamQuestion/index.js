@@ -22,7 +22,7 @@ class ExamQuestionService extends Service {
   }
 
   async getAll() {
-    return await ExamQuestionRepo.getAll();
+    return await ExamQuestionRepo.getAll(this.data);
   }
 
   async getById() {

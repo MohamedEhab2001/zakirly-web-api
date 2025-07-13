@@ -12,7 +12,7 @@ class PricesRepository {
     return await models.Prices.create(data);
   }
 
-  static async transactionCreate(data , transaction) {
+  static async bulkCreate(data , transaction) {
     const modelValidate = new ModelValidation(models.Prices);
     modelValidate.ModelKeysValidate(data[0], []);
     return await models.Prices.bulkCreate(data , { transaction });

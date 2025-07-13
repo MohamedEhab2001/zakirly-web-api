@@ -28,6 +28,10 @@ class ChoiceService extends Service {
     return await ChoiceRepo.ById(this.id);
   }
 
+  async getAllByQuestionIds() {
+    return await ChoiceRepo.getAllByQuestionIds(this.data.questionIds);
+  }
+
   async update() {
     this._checkIfDataProvided();
     this._checkIfIdProvided();

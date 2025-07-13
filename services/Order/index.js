@@ -33,10 +33,12 @@ class OrderService extends Service {
     }
 
     const orderProducts = this.data.items.map((item) => {
+      const id = item.id;
+      delete item.id;
       return {
         ...item,
         price: item.price,
-        entity_id: item.id,
+        entity_id: id,
         total: item.price * item.quantity,
         order_id: record.id,
       };

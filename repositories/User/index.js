@@ -32,6 +32,10 @@ class UserRepository {
                 {
                   model : models.Book,
                   as : "book",
+                },
+                {
+                  model : models.Exam,
+                  as : "exam",
                 }
               ]
             }
@@ -40,7 +44,13 @@ class UserRepository {
         {
           model: models.Solution,
           as: "solutions",
-          required: false
+          required: false,
+          include : [
+            {
+              model : models.Exam,
+              as : "exam"
+            }
+          ]
         }
       ]
     });

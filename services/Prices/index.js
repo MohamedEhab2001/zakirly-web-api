@@ -14,9 +14,9 @@ class PricesService extends Service {
     return record;
   }
 
-    async transactionCreate() {
+    async bulkCreate() {
       this._checkIfDataProvided();
-      const record = await PricesRepo.transactionCreate(this.data , this.transaction);
+      const record = await PricesRepo.bulkCreate(this.data , this.transaction);
       return record; 
     }
 

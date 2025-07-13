@@ -19,7 +19,7 @@ class BookService extends Service {
     }))
 
     const pricesService = new PricesService(prices , null , transaction);
-    await pricesService.transactionCreate();
+    await pricesService.bulkCreate();
 
     await transaction.commit();
 

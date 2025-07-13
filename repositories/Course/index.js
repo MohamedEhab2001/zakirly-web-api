@@ -7,7 +7,7 @@ class CourseRepository {
   static async create(data) {
     const transaction = await models.sequelize.transaction();
     const modelValidate = new ModelValidation(models.Course);
-    modelValidate.ModelKeysValidate(data, []);
+    modelValidate.ModelKeysValidate(data, ["discount"]);
     const record = await models.Course.create(data , {transaction});
     return [record , transaction];
   }

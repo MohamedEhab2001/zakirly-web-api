@@ -19,6 +19,10 @@ class ChoiceRepository {
     return await models.Choice.findAll();
   }
 
+  static async getAllByQuestionIds(questionIds) {
+    return await models.Choice.findAll({where : {question_id : {[models.Sequelize.Op.in] : questionIds}}});
+  }
+
   static async ById(id) {
     return await models.Choice.findByPk(id);
   }

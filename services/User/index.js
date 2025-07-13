@@ -54,10 +54,12 @@ class UserService extends Service {
     }
     if (user.solutions && user.solutions.length > 0) {
       const total = user.solutions.reduce((sum, s) => sum + (s.total || 0), 0);
-      user.dataValues.average_score = total / user.solutions.length;
+      user.dataValues.average_score = total;
     } else {
       user.dataValues.average_score = null;
     }
+
+    
     return user;
   }
 
