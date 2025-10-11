@@ -6,6 +6,7 @@ const {
   TestimonialGetAll,
   TestimonialGetById,
   TestimonialUpdate,
+  TestimonialDelete,
 } = require("../controllers/Testimonial");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(TestimonialUpdate)
-  .get(TestimonialGetById);
+  .get(TestimonialGetById)
+  .delete(TestimonialDelete);
 
 module.exports = router;

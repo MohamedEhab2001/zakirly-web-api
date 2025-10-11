@@ -26,6 +26,11 @@ class TestimonialService extends Service {
     this._checkIfIdProvided();
     return await TestimonialRepo.update(this.id, this.data);
   }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await TestimonialRepo.delete(this.id);
+  }
 }
 
 module.exports = TestimonialService;

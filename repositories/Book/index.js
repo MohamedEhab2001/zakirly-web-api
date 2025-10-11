@@ -12,8 +12,15 @@ class BookRepository {
   }
 
   static async getAll(data) {
-    const [country] = extractKeys(data,["country"])
+    const [country,p] = extractKeys(data, ["country" , "p"])
+    const whereCountry = !p ? {
+      isocode : country
+  } : {}
+
+  
+
     return await models.Book.findAll({
+      where : data,
       include : [
         {
             model : models.Section,
@@ -30,9 +37,7 @@ class BookRepository {
               {
                   model : models.Currency,
                   as : "currency",
-                  where : {
-                      isocode : country
-                  }
+                  where : whereCountry
               }
           ],
           where : {

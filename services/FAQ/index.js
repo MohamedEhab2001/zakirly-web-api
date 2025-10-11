@@ -26,6 +26,11 @@ class FAQService extends Service {
     this._checkIfIdProvided();
     return await FAQRepo.update(this.id, this.data);
   }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await FAQRepo.delete(this.id);
+  }
 }
 
 module.exports = FAQService;

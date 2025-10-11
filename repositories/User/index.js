@@ -56,6 +56,10 @@ class UserRepository {
     });
   }
 
+  static async count() {
+    return await models.User.count();
+  }
+
   static async update(id, data) {
     return await models.User.update(data, { where: { id } });
   }

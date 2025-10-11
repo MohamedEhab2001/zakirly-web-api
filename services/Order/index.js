@@ -9,7 +9,7 @@ class OrderService extends Service {
     super(data, id);
   }
 
-  async create() {
+  async create() {    
     this._checkIfDataProvided(null , ["userId" , "info" , "items"]);
 
     const total = this.data.items.reduce((total , item) => {
@@ -52,7 +52,11 @@ class OrderService extends Service {
   }
 
   async getAll() {
-    return await OrderRepo.getAll();
+    return await OrderRepo.getAll(this.data);
+  }
+
+  async count() {
+    return await OrderRepo.count(this.data);
   }
 
   async getById() {

@@ -13,21 +13,21 @@ class CourseService extends Service {
   }
 
   async create() {
-    this._checkIfDataProvided(null , ["course_books" , "course_learnings" , "course_prerequests" , "prices"]);
+    this._checkIfDataProvided(null , ["books" , "learnings" , "prerequests" , "prices"]);
     const [record, transaction] = await CourseRepo.create(this.data);
 
 
-    const books = this.data.course_books.map(book => ({
+    const books = this.data.books.map(book => ({
       book_id : book,
       course_id : record.id
     }))
 
-    const learnings = this.data.course_learnings.map(learning => ({
+    const learnings = this.data.learnings.map(learning => ({
       ...learning,
       course_id : record.id
     }))
 
-    const prerequests = this.data.course_prerequests.map(prerequest => ({
+    const prerequests = this.data.prerequests.map(prerequest => ({
       ...prerequest,
       course_id : record.id
     }))

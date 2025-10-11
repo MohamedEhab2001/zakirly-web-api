@@ -26,6 +26,11 @@ class AgeService extends Service {
     this._checkIfIdProvided();
     return await AgeRepo.update(this.id, this.data);
   }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await AgeRepo.delete(this.id);
+  }
 }
 
 module.exports = AgeService;

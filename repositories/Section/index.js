@@ -10,15 +10,26 @@ class SectionRepository {
   }
 
   static async getAll() {
-    return await models.Section.findAll();
+    return await models.Section.findAll({
+      include: [{
+        model:models.Curriculum,
+        as:"curriculum"
+      }]
+    });
   }
 
   static async ById(id) {
-    return await models.Section.findByPk(id);
+    return await models.Section.findByPk(id,{
+      include: [models.Curriculum]
+    });
   }
 
   static async update(id, data) {
     return await models.Section.update(data, { where: { id } });
+  }
+
+  static async delete(id) {
+    return await models.Section.destroy({ where: { id } });
   }
 }
 

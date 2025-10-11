@@ -6,6 +6,7 @@ const {
   AgeGetAll,
   AgeGetById,
   AgeUpdate,
+  AgeDelete,
 } = require("../controllers/Age");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(AgeUpdate)
-  .get(AgeGetById);
+  .get(AgeGetById)
+  .delete(AgeDelete);
 
 module.exports = router;

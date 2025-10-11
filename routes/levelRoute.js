@@ -6,6 +6,7 @@ const {
   LevelGetAll,
   LevelGetById,
   LevelUpdate,
+  LevelDelete,
 } = require("../controllers/Level");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(LevelUpdate)
-  .get(LevelGetById);
+  .get(LevelGetById)
+  .delete(LevelDelete);
 
 module.exports = router;

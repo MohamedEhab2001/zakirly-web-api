@@ -25,9 +25,16 @@ const TestimonialUpdate = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const TestimonialDelete = async (req, res) => {
+    const servant = new TestimonialService(null, req.params.id);
+    const record = await servant.delete();
+    res.status(200).json({ record });
+};
+
 module.exports = {
   TestimonialCreation,
   TestimonialGetAll,
   TestimonialGetById,
   TestimonialUpdate,
+  TestimonialDelete,
 };

@@ -25,9 +25,16 @@ const FAQUpdate = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const FAQDelete = async (req, res) => {
+    const servant = new FAQService(null, req.params.id);
+    const record = await servant.delete();
+    res.status(200).json({ record });
+};
+
 module.exports = {
   FAQCreation,
   FAQGetAll,
   FAQGetById,
   FAQUpdate,
+  FAQDelete,
 };

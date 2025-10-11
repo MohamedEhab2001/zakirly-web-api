@@ -30,7 +30,21 @@ const One  = (models) => {
                     {
                         model : models.Level,
                         as : "level"
+                    },
+                    {
+                        model : models.Prices,
+                        as : "prices",
+                        include : [
+                            {
+                                model : models.Currency,
+                                as : "currency",
+                            }
+                        ],
+                        where : {
+                            type : "course"
+                        }
                     }
+
                 ]
             },
             {
@@ -51,4 +65,25 @@ const One  = (models) => {
     }
 }
 
-module.exports = { One }
+
+const All = (models) => {
+  return {
+    include : [
+        {
+            model : models.TeacherQualification,
+            as : "qualifications"
+        },
+        {
+            model : models.TeacherSection,
+            as : "sections",
+            include : [
+                {
+                    model : models.Section,
+                    as : "section"
+                }
+            ]
+        },
+    ]
+  }
+}
+module.exports = { One , All }

@@ -12,11 +12,25 @@ class QuestionRepository {
   }
 
   static async getAll() {
-    return await models.Question.findAll();
+    return await models.Question.findAll({
+      include: [
+        {
+          model: models.Choice,
+          as: "choices",
+        },
+      ],
+    });
   }
 
   static async ById(id) {
-    return await models.Question.findByPk(id);
+    return await models.Question.findByPk(id , {
+      include: [
+        {
+          model: models.Choice,
+          as: "choices",
+        },
+      ],
+    });
   }
 
   static async update(id, data) {

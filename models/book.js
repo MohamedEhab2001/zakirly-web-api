@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Book.belongsTo(models.Section , {foreignKey : "section_id" , as : "section"})
       Book.belongsTo(models.Age , {foreignKey : "age_id" , as : "age"})
+      Book.belongsTo(models.Teacher , {foreignKey : "teacher_id" , as : "teacher"})
       Book.hasMany(models.Prices , {foreignKey : "entity_id" , as : "prices"})
     }
   }
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     cover_url: DataTypes.STRING,
     section_id: DataTypes.INTEGER,
     age_id: DataTypes.INTEGER,
+    teacher_id: DataTypes.INTEGER,
     rating: DataTypes.FLOAT,
     pages_number: DataTypes.INTEGER,
     language: DataTypes.STRING,

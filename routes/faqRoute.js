@@ -6,6 +6,7 @@ const {
   FAQGetAll,
   FAQGetById,
   FAQUpdate,
+  FAQDelete,
 } = require("../controllers/FAQ");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(FAQUpdate)
-  .get(FAQGetById);
+  .get(FAQGetById)
+  .delete(FAQDelete);
 
 module.exports = router;

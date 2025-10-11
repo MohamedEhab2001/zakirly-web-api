@@ -26,6 +26,11 @@ class CurriculumService extends Service {
     this._checkIfIdProvided();
     return await CurriculumRepo.update(this.id, this.data);
   }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await CurriculumRepo.delete(this.id);
+  }
 }
 
 module.exports = CurriculumService;

@@ -20,6 +20,10 @@ class FAQRepository {
   static async update(id, data) {
     return await models.FAQ.update(data, { where: { id } });
   }
+
+  static async delete(id) {
+    return await models.FAQ.destroy({ where: { id } });
+  }
 }
 
 module.exports = FAQRepository;

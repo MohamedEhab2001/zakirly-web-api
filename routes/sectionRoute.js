@@ -6,6 +6,7 @@ const {
   SectionGetAll,
   SectionGetById,
   SectionUpdate,
+  SectionDelete,
 } = require("../controllers/Section");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(SectionUpdate)
-  .get(SectionGetById);
+  .get(SectionGetById)
+  .delete(SectionDelete);
 
 module.exports = router;

@@ -7,14 +7,26 @@ const {
   TeacherGetById,
   TeacherUpdate,
   TeacherDelete,
+  TeacherLogin,
+  TeacherProfile,
 } = require("../controllers/Teacher");
+const { auth } = require("../middlewares/authMiddleware");
 
 router.route("/")
   .post(TeacherCreation)
   .get(TeacherGetAll);
+  
+
+router.route("/login")
+  .post(TeacherLogin);
+
+
+router.route("/profile")
+  .get(auth,TeacherProfile);
+
 
 router.route("/:id")
-  .put(TeacherUpdate)
+  .put(auth,TeacherUpdate)
   .get(TeacherGetById)
   .delete(TeacherDelete);
 

@@ -20,6 +20,10 @@ class AgeRepository {
   static async update(id, data) {
     return await models.Age.update(data, { where: { id } });
   }
+
+  static async delete(id) {
+    return await models.Age.destroy({ where: { id } });
+  }
 }
 
 module.exports = AgeRepository;

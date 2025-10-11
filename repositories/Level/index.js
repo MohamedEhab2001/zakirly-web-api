@@ -20,6 +20,11 @@ class LevelRepository {
   static async update(id, data) {
     return await models.Level.update(data, { where: { id } });
   }
+
+  static async delete(id) {
+    return await models.Level.destroy({ where: { id } });
+  }
+
 }
 
 module.exports = LevelRepository;

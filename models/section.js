@@ -11,10 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Section.belongsTo(models.Curriculum, {
+        foreignKey: 'curriculum_id',
+        as: 'curriculum'
+      });
     }
   }
   Section.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    curriculum_id:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Section',

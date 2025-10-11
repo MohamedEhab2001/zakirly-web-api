@@ -20,6 +20,11 @@ class CurriculumRepository {
   static async update(id, data) {
     return await models.Curriculum.update(data, { where: { id } });
   }
+
+  static async delete(id) {
+    return await models.Curriculum.destroy({ where: { id } });
+  }
+
 }
 
 module.exports = CurriculumRepository;

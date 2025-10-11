@@ -6,6 +6,7 @@ const {
   CurrencyGetAll,
   CurrencyGetById,
   CurrencyUpdate,
+  CurrencyDelete,
 } = require("../controllers/Currency");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(CurrencyUpdate)
-  .get(CurrencyGetById);
+  .get(CurrencyGetById)
+  .delete(CurrencyDelete);
 
 module.exports = router;

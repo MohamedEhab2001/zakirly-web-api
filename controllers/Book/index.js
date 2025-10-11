@@ -8,7 +8,7 @@ const BookCreation = async (req, res) => {
 };
 
 const BookGetAll = async (req, res) => {
-    const servant = new BookService({country : req.country});
+    const servant = new BookService({country : req.country , ...req.query});
     const records = await servant.getAll();
     res.status(200).json({ records });
 };

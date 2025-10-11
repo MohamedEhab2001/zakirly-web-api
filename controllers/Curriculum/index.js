@@ -25,9 +25,16 @@ const CurriculumUpdate = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const CurriculumDelete = async (req, res) => {
+    const servant = new CurriculumService(null, req.params.id);
+    const record = await servant.delete();
+    res.status(200).json({ record });
+};
+
 module.exports = {
   CurriculumCreation,
   CurriculumGetAll,
   CurriculumGetById,
   CurriculumUpdate,
+  CurriculumDelete,
 };

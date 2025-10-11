@@ -1,4 +1,30 @@
-const All = (models , country) => {
+const All = (models , country , dash=false) => {
+
+    const whereCountry = country ? {
+        isocode : country
+    } : {}
+
+    const dashRequiremnest = [{
+        model : models.CourseLearning,
+        as:"learnings"
+    },
+    {
+        model : models.CoursePrerequest,
+        as:"prerequests"
+    },
+    {
+        model : models.CourseBook,
+        as:"books",
+        include : [
+            {
+                model : models.Book,
+                as : "book"
+            }
+        ]
+    },
+                             ]
+    
+
     return {
         include : [
             {
@@ -21,6 +47,7 @@ const All = (models , country) => {
                 model : models.Curriculum,
                 as : "curriculum"
             }, 
+            ...dashRequiremnest,
             {
                 model : models.Prices,
                 as : "prices",
@@ -28,9 +55,7 @@ const All = (models , country) => {
                     {
                         model : models.Currency,
                         as : "currency",
-                        where : {
-                            isocode : country
-                        }
+                        where : whereCountry
                     }
                 ],
                 where : {

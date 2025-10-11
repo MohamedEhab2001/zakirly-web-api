@@ -20,6 +20,11 @@ class CurrencyRepository {
   static async update(id, data) {
     return await models.Currency.update(data, { where: { id } });
   }
+
+  static async delete(id) {
+    return await models.Currency.destroy({ where: { id } });
+  }
+
 }
 
 module.exports = CurrencyRepository;

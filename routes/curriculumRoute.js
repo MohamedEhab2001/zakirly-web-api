@@ -6,6 +6,7 @@ const {
   CurriculumGetAll,
   CurriculumGetById,
   CurriculumUpdate,
+  CurriculumDelete,
 } = require("../controllers/Curriculum");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(CurriculumUpdate)
-  .get(CurriculumGetById);
+  .get(CurriculumGetById)
+  .delete(CurriculumDelete);
 
 module.exports = router;

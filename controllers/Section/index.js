@@ -25,9 +25,16 @@ const SectionUpdate = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const SectionDelete = async (req, res) => {
+    const servant = new SectionService(null, req.params.id);
+    const record = await servant.delete();
+    res.status(200).json({ record });
+};
+
 module.exports = {
   SectionCreation,
   SectionGetAll,
   SectionGetById,
   SectionUpdate,
+  SectionDelete,
 };

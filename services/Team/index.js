@@ -26,6 +26,11 @@ class TeamService extends Service {
     this._checkIfIdProvided();
     return await TeamRepo.update(this.id, this.data);
   }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await TeamRepo.delete(this.id);
+  }
 }
 
 module.exports = TeamService;

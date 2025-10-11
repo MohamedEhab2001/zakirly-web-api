@@ -25,9 +25,16 @@ const TeamUpdate = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const TeamDelete = async (req, res) => {
+    const servant = new TeamService(null, req.params.id);
+    const record = await servant.delete();
+    res.status(200).json({ record });
+};
+
 module.exports = {
   TeamCreation,
   TeamGetAll,
   TeamGetById,
   TeamUpdate,
+  TeamDelete,
 };

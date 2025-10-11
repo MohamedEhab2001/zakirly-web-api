@@ -21,6 +21,10 @@ class TestimonialRepository {
     return await models.Testimonial.update(data, { where: { id } });
   }
 
+  static async delete(id) {
+    return await models.Testimonial.destroy({ where: { id } });
+  }
+
     
 }
 

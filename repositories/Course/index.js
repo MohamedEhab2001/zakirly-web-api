@@ -13,9 +13,9 @@ class CourseRepository {
   }
 
   static async getAll(data) {
-    const [country] = extractKeys(data,["country"])
+    const [country,p , dash] = extractKeys(data,["country" , "p" , "dash"])
 
-    return await models.Course.findAll({ where : data , ...All(models , country) });
+    return await models.Course.findAll({ where : data , ...All(models , !p ? country : null , !!dash) });
   }
 
   static async ById(data,id) {

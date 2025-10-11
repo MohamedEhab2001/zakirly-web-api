@@ -22,7 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.FLOAT,
     job: DataTypes.STRING,
     name: DataTypes.STRING,
-    desc: DataTypes.TEXT
+    desc: DataTypes.TEXT,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Teacher',

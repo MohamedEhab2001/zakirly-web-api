@@ -26,6 +26,11 @@ class SectionService extends Service {
     this._checkIfIdProvided();
     return await SectionRepo.update(this.id, this.data);
   }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await SectionRepo.delete(this.id);
+  }
 }
 
 module.exports = SectionService;

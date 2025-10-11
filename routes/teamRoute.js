@@ -6,6 +6,7 @@ const {
   TeamGetAll,
   TeamGetById,
   TeamUpdate,
+  TeamDelete,
 } = require("../controllers/Team");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(TeamUpdate)
-  .get(TeamGetById);
+  .get(TeamGetById)
+  .delete(TeamDelete);
 
 module.exports = router;

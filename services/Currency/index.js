@@ -25,6 +25,13 @@ class CurrencyService extends Service {
     this._checkIfIdProvided();
     return await CurrencyRepo.update(this.id, this.data);
   }
+  
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await CurrencyRepo.delete(this.id);
+  }
+
 }
 
 module.exports = CurrencyService;

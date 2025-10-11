@@ -42,6 +42,10 @@ class UserService extends Service {
     return await UserRepo.getAll();
   }
 
+  async count() {
+    return await UserRepo.count();
+  }
+
   async getById() {
     const user = await UserRepo.ById(this.id);
     if(!user) throw new Error("User not found");

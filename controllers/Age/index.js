@@ -25,9 +25,16 @@ const AgeUpdate = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const AgeDelete = async (req, res) => {
+    const servant = new AgeService(null, req.params.id);
+    const record = await servant.delete();
+    res.status(200).json({ record });
+};
+
 module.exports = {
   AgeCreation,
   AgeGetAll,
   AgeGetById,
   AgeUpdate,
+  AgeDelete,
 };

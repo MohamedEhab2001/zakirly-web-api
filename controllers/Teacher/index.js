@@ -13,6 +13,12 @@ const TeacherGetAll = async (req, res) => {
     res.status(200).json({ records });
 };
 
+const TeacherProfile = async (req, res) => {
+    const servant = new TeacherService(null, req.auth.id);
+    const record = await servant.getById();
+    res.status(200).json({ record });
+};
+
 const TeacherGetById = async (req, res) => {
     const servant = new TeacherService(null, req.params.id);
     const record = await servant.getById();
@@ -31,10 +37,18 @@ const TeacherDelete = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const TeacherLogin = async (req, res) => {
+    const servant = new TeacherService(req.body);
+    const record = await servant.login();
+    res.status(200).json({ record });
+};
+
 module.exports = {
   TeacherCreation,
   TeacherGetAll,
   TeacherGetById,
   TeacherUpdate,
+  TeacherLogin,
   TeacherDelete,
+  TeacherProfile
 };

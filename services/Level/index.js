@@ -26,6 +26,11 @@ class LevelService extends Service {
     this._checkIfIdProvided();
     return await LevelRepo.update(this.id, this.data);
   }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await LevelRepo.delete(this.id);
+  } 
 }
 
 module.exports = LevelService;

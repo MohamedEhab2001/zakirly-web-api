@@ -20,6 +20,10 @@ class TeamRepository {
   static async update(id, data) {
     return await models.Team.update(data, { where: { id } });
   }
+
+  static async delete(id) {
+    return await models.Team.destroy({ where: { id } });
+  }
 }
 
 module.exports = TeamRepository;

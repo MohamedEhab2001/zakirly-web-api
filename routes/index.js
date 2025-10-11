@@ -10,6 +10,7 @@ const teamRoute = require("./teamRoute")
 const testimonialRoute = require("./testimonialRoute")
 const userRoute = require("./userRoute")
 const videoRoute = require("./videoRoute")
+const webContentRoute = require("./webContentRoute")
 const teacherRoute = require("./teacherRoute")
 const curriculumRoute = require("./curriculumRoute")
 const sectionsRoute = require("./sectionRoute")
@@ -20,7 +21,8 @@ const questionRoute = require("./questionRoute")
 const orderRoute = require("./orderRoute")
 const currencyRoute = require("./currencyRoute")
 const solutionRoute = require("./solutionRoute")
-
+const fawaterkRoute = require("./fawaterk")
+const dashboardRoute = require("./dashboardRoute")
 
 module.exports = useRoutes = (app) => {
   app.use("/ages", ageRoute)
@@ -35,6 +37,7 @@ module.exports = useRoutes = (app) => {
   app.use("/testimonials", testimonialRoute)
   app.use("/users", userRoute)
   app.use("/videos", videoRoute)
+  app.use("/webcontents", webContentRoute)
   app.use("/teachers", teacherRoute)
   app.use("/curriculums", curriculumRoute)
   app.use("/sections", sectionsRoute)
@@ -45,5 +48,7 @@ module.exports = useRoutes = (app) => {
   app.use("/orders" , orderRoute)
   app.use("/currencies" , currencyRoute)
   app.use("/solutions" , solutionRoute)
+  app.use("/fawaterk" , fawaterkRoute)
+  app.use("/dashboard" , dashboardRoute)
   console.log("Routes Defined");
 };
