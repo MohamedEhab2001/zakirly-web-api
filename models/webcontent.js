@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     video_thumbnail: DataTypes.STRING,
     herosection_title: DataTypes.STRING,
     hersection_slogan: DataTypes.STRING,
-    herosection_description: DataTypes.TEXT
+    herosection_description: DataTypes.TEXT,
+    hersection_image_url: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'WebContent',
