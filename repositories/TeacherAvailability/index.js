@@ -9,8 +9,8 @@ class TeacherAvailabilityRepository {
     return await models.TeacherAvailability.create(data);
   }
 
-  static async getAll() {
-    return await models.TeacherAvailability.findAll();
+  static async getAll(id) {
+    return await models.TeacherAvailability.findAll({ where: { teacher_id: id } });
   }
 
   static async ById(id) {
@@ -20,6 +20,28 @@ class TeacherAvailabilityRepository {
   static async update(id, data) {
     return await models.TeacherAvailability.update(data, { where: { id } });
   }
+  static async delete(id) {
+    return await models.TeacherAvailability.destroy({ where: { id } });
+  }
+  static async findActiveById(id) {
+    return await models.TeacherAvailability.findOne({
+      where: { id, is_active: true },
+      include: [
+        {
+          model: models.Teacher,
+          as: "teacher",
+          attributes: ["id", "email", "name"]
+        }
+      ]
+    });
+  }
+  static async disableAvailability(id) {
+    return await models.TeacherAvailability.update(
+      { is_active: false },
+      { where: { id } }
+    );
+  }
 }
+
 
 module.exports = TeacherAvailabilityRepository;

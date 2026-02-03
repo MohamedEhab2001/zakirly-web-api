@@ -6,6 +6,10 @@ const One  = (models) => {
                 as : "qualifications"
             },
             {
+                model : models.TeacherAvailability,
+                as : "availabilities"
+            },
+            {
                 model : models.TeacherSection,
                 as : "sections",
                 include : [

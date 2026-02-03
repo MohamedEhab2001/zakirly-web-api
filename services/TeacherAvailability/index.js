@@ -14,7 +14,7 @@ class TeacherAvailabilityService extends Service {
   }
 
   async getAll() {
-    return await TeacherAvailabilityRepo.getAll();
+    return await TeacherAvailabilityRepo.getAll(this.id);
   }
 
   async getById() {
@@ -25,6 +25,11 @@ class TeacherAvailabilityService extends Service {
     this._checkIfDataProvided();
     this._checkIfIdProvided();
     return await TeacherAvailabilityRepo.update(this.id, this.data);
+  }
+
+  async delete() {
+    this._checkIfIdProvided();
+    return await TeacherAvailabilityRepo.delete(this.id);
   }
 }
 

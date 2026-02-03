@@ -12,6 +12,8 @@ const userRoute = require("./userRoute")
 const videoRoute = require("./videoRoute")
 const webContentRoute = require("./webContentRoute")
 const teacherRoute = require("./teacherRoute")
+
+
 const curriculumRoute = require("./curriculumRoute")
 const sectionsRoute = require("./sectionRoute")
 const levelsRoute = require("./levelRoute")
@@ -23,6 +25,10 @@ const currencyRoute = require("./currencyRoute")
 const solutionRoute = require("./solutionRoute")
 const fawaterkRoute = require("./fawaterk")
 const dashboardRoute = require("./dashboardRoute")
+
+const meetingsRoute = require("./teamsMeeting")
+
+
 
 module.exports = useRoutes = (app) => {
   app.use("/ages", ageRoute)
@@ -39,6 +45,7 @@ module.exports = useRoutes = (app) => {
   app.use("/videos", videoRoute)
   app.use("/webcontents", webContentRoute)
   app.use("/teachers", teacherRoute)
+  
   app.use("/curriculums", curriculumRoute)
   app.use("/sections", sectionsRoute)
   app.use("/levels" , levelsRoute)
@@ -50,5 +57,6 @@ module.exports = useRoutes = (app) => {
   app.use("/solutions" , solutionRoute)
   app.use("/fawaterk" , fawaterkRoute)
   app.use("/dashboard" , dashboardRoute)
+  app.use("/CreateMeeting", meetingsRoute)
   console.log("Routes Defined");
 };

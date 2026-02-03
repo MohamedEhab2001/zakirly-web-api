@@ -1,11 +1,12 @@
 
 const express = require("express");
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 const {
   TeacherAvailabilityCreation,
   TeacherAvailabilityGetAll,
   TeacherAvailabilityGetById,
   TeacherAvailabilityUpdate,
+  TeacherAvailabilityDelete,
 } = require("../controllers/TeacherAvailability");
 
 router.route("/")
@@ -14,6 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .put(TeacherAvailabilityUpdate)
-  .get(TeacherAvailabilityGetById);
+  .get(TeacherAvailabilityGetById)
+  .delete(TeacherAvailabilityDelete);
 
 module.exports = router;

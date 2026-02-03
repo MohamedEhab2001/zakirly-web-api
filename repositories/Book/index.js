@@ -13,6 +13,8 @@ class BookRepository {
 
   static async getAll(data) {
     const [country,p] = extractKeys(data, ["country" , "p"])
+    console.log({ country, p });
+
     const whereCountry = !p ? {
       isocode : country
   } : {}

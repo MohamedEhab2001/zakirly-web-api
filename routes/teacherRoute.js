@@ -10,7 +10,16 @@ const {
   TeacherLogin,
   TeacherProfile,
 } = require("../controllers/Teacher");
+const {
+  TeacherAvailabilityCreation,
+  TeacherAvailabilityGetAll,
+  TeacherAvailabilityUpdate,
+  TeacherAvailabilityDelete,
+  TeacherAvailabilityGetById,
+} = require("../controllers/TeacherAvailability");
 const { auth } = require("../middlewares/authMiddleware");
+const teacherAvailabilityRouter = require("../routes/teacheravailabilityRoute");
+
 
 router.route("/")
   .post(TeacherCreation)
@@ -30,4 +39,11 @@ router.route("/:id")
   .get(TeacherGetById)
   .delete(TeacherDelete);
 
+  router.route("/:id/availabilities")
+    .get(TeacherAvailabilityGetAll)
+    .post(TeacherAvailabilityCreation)
+  router.route("/:id/availabilities/:availability_id")
+    .put(TeacherAvailabilityUpdate)
+    .delete(TeacherAvailabilityDelete)
+    .get(TeacherAvailabilityGetById)
 module.exports = router;

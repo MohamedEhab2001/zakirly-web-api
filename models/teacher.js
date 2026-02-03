@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         Teacher.hasMany(models.Exam , { foreignKey : "teacher_id" , as :"exams"})
         Teacher.hasMany(models.Course , { foreignKey : "teacher_id" , as :"courses"})
         Teacher.hasMany(models.TeacherReview , { foreignKey : "teacher_id" , as :"reviews"})
+        Teacher.hasMany(models.TeacherAvailability , { foreignKey : "teacher_id" , as :"availabilities"})
+        Teacher.hasMany(models.TeacherSession , { foreignKey : "teacher_id" , as :"sessions"})
     }
   }
   Teacher.init({
