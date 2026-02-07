@@ -6,7 +6,7 @@ class QuestionRepository {
   static async create(data) {
     const transaction = await models.sequelize.transaction()
     const modelValidate = new ModelValidation(models.Question);
-    modelValidate.ModelKeysValidate(data, []);
+    modelValidate.ModelKeysValidate(data, ["question_image"]);
     const record = await models.Question.create(data , {transaction});
     return [record , transaction]
   }

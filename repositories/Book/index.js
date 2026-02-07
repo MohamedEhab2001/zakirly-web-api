@@ -6,7 +6,7 @@ class BookRepository {
   static async create(data) {
     const transaction = await models.sequelize.transaction();
     const modelValidate = new ModelValidation(models.Book);
-    modelValidate.ModelKeysValidate(data, []);
+    modelValidate.ModelKeysValidate(data, ["teacher_id"]);
     const record = await models.Book.create(data , {transaction});
     return [record , transaction];
   }
