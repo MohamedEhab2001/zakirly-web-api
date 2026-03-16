@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     herosection_title: DataTypes.STRING,
     hersection_slogan: DataTypes.STRING,
     herosection_description: DataTypes.TEXT,
-    hersection_image_url: DataTypes.STRING
+    hersection_image_url: DataTypes.STRING,
+    whatsapp: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'WebContent',
