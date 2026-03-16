@@ -36,6 +36,9 @@ class Zakirly {
       });
       return response.data;
     } catch (error) {
+      if (error.response && error.response.status === 404 && method === 'get') {
+        return null;
+      }
       throw error.response ? error.response.data : error;
     }
   }

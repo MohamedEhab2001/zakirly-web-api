@@ -29,7 +29,7 @@ class UserService extends Service {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) throw new unAuthanticated('خطأ في بيانات الدخول');
     // const token = generateToken({ id: user.id, email: user.email } , "10d");
-    return  user;
+    return user;
   }
 
   async create() {
@@ -48,13 +48,17 @@ class UserService extends Service {
 
   async getById() {
     const user = await UserRepo.ById(this.id);
-    if(!user) throw new Error("User not found");
+    if (!user) throw new Error("User not found");
     const zakirly = new Zakirly();
-    const student = await zakirly.getStudentByEmail(user.email);
-    if(student){
-      delete student._id;
-      delete student.__v;
-      user.dataValues.dashboard = student;
+    try {
+      const student = await zakirly.getStudentByEmail(user.email);
+      if (student && student._id) {
+        delete student._id;
+        delete student.__v;
+        user.dataValues.dashboard = student;
+      }
+    } catch (error) {
+      console.log("Zakirly API error:", error.msg || error.message || error);
     }
     if (user.solutions && user.solutions.length > 0) {
       const total = user.solutions.reduce((sum, s) => sum + (s.total || 0), 0);
@@ -63,7 +67,7 @@ class UserService extends Service {
       user.dataValues.average_score = null;
     }
 
-    
+
     return user;
   }
 
