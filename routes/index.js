@@ -25,6 +25,7 @@ const currencyRoute = require("./currencyRoute")
 const solutionRoute = require("./solutionRoute")
 const fawaterkRoute = require("./fawaterk")
 const dashboardRoute = require("./dashboardRoute")
+const withdrawalRequestRoute = require("./withdrawalRequestRoute")
 
 const meetingsRoute = require("./teamsMeeting")
 
@@ -57,6 +58,7 @@ module.exports = useRoutes = (app) => {
   app.use("/solutions" , solutionRoute)
   app.use("/fawaterk" , fawaterkRoute)
   app.use("/dashboard" , dashboardRoute)
+  app.use("/withdrawal-requests" , withdrawalRequestRoute)
   app.use("/CreateMeeting", meetingsRoute)
   console.log("Routes Defined");
 };

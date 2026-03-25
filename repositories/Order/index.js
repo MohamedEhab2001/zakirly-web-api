@@ -19,7 +19,7 @@ class OrderRepository {
       include : [
         {
           model: models.User,
-          attributes : ["id" , "name" , "email"],
+          attributes : ["id" , "name" , "email", "phone", "avatar"],
           as : "user"
         },
         {

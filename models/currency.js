@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Currency.init({
     code: DataTypes.STRING,
     name: DataTypes.STRING,
-    isocode: DataTypes.STRING
+    isocode: DataTypes.STRING,
+    shipping_fee: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'Currency',

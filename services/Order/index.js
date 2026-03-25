@@ -12,9 +12,11 @@ class OrderService extends Service {
   async create() {    
     this._checkIfDataProvided(null , ["userId" , "info" , "items"]);
 
-    const total = this.data.items.reduce((total , item) => {
-      return total + item.price * item.quantity;
+    const itemsTotal = this.data.items.reduce((acc , item) => {
+      return acc + item.price * item.quantity;
     }, 0);
+    const shippingFee = this.data.info?.shipping_fee || 0;
+    const total = itemsTotal + shippingFee;
     const courses = this.data.items.filter(item => item.type === "course" && item?.kind === "online");
     const books = this.data.items.filter(item => item.type === "book");
     
