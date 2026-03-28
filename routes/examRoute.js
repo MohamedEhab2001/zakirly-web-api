@@ -8,6 +8,7 @@ const {
   ExamUpdate,
   ExamAddPrice,
   ExamGetQuestionById,
+  ExamDelete,
 } = require("../controllers/Exam");
 
 router.route("/")
@@ -19,7 +20,8 @@ router.route("/:id/prices")
 
 router.route("/:id")
   .put(ExamUpdate)
-  .get(ExamGetById);
+  .get(ExamGetById)
+  .delete(ExamDelete);
 
 router.route("/:id/questions")
   .get(ExamGetQuestionById);

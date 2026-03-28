@@ -37,6 +37,12 @@ const ExamGetQuestionById = async (req, res) => {
     res.status(200).json({ record });
 };
 
+const ExamDelete = async (req, res) => {
+    const servant = new ExamService(null, req.params.id);
+    await servant.delete();
+    res.status(200).json({ success: true, message: "Exam deleted successfully" });
+};
+
 module.exports = {
   ExamCreation,
   ExamGetAll,
@@ -44,4 +50,5 @@ module.exports = {
   ExamUpdate,
   ExamAddPrice,
   ExamGetQuestionById,
+  ExamDelete,
 };
