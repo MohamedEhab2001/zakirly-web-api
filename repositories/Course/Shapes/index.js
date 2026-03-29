@@ -1,105 +1,106 @@
-const All = (models , country , dash=false) => {
+const All = (models, country, dash = false) => {
 
     const whereCountry = country ? {
-        isocode : country
+        isocode: country
     } : {}
 
     const dashRequiremnest = [{
-        model : models.CourseLearning,
-        as:"learnings"
+        model: models.CourseLearning,
+        as: "learnings"
     },
     {
-        model : models.CoursePrerequest,
-        as:"prerequests"
+        model: models.CoursePrerequest,
+        as: "prerequests"
     },
     {
-        model : models.CourseBook,
-        as:"books",
-        include : [
+        model: models.CourseBook,
+        as: "books",
+        include: [
             {
-                model : models.Book,
-                as : "book"
+                model: models.Book,
+                as: "book"
             }
         ]
     },
-                             ]
-    
+    ]
+
 
     return {
-        include : [
+        include: [
             {
-                model : models.Section,
-                as : "section"
+                model: models.Section,
+                as: "section"
             },
             {
-                model : models.Age,
-                as : "age"
+                model: models.Age,
+                as: "age"
             },
             {
-                model : models.Level,
-                as : "level"
+                model: models.Level,
+                as: "level"
             },
             {
-                model : models.Teacher,
-                as : "teacher"
+                model: models.Teacher,
+                as: "teacher"
             },
             {
-                model : models.Curriculum,
-                as : "curriculum"
-            }, 
+                model: models.Curriculum,
+                as: "curriculum"
+            },
             ...dashRequiremnest,
             {
-                model : models.Prices,
-                as : "prices",
-                include : [
+                model: models.Prices,
+                as: "prices",
+
+                include: [
                     {
-                        model : models.Currency,
-                        as : "currency",
-                        where : whereCountry
+                        model: models.Currency,
+                        as: "currency",
+                        where: whereCountry
                     }
                 ],
-                where : {
-                    type : "course"
+                where: {
+                    type: "course",
                 }
             }
         ]
     }
 }
 
-const One = (models , country) => {
-    const get = All(models , country)
+const One = (models, country) => {
+    const get = All(models, country)
     return {
-        include : [
+        include: [
             ...get.include,
             {
-                model : models.CourseLearning,
-                as:"learnings"
+                model: models.CourseLearning,
+                as: "learnings"
             },
             {
-                model : models.CoursePrerequest,
-                as:"prerequests"
+                model: models.CoursePrerequest,
+                as: "prerequests"
             },
             {
-                model : models.CourseBook,
-                as:"books",
-                include : [
+                model: models.CourseBook,
+                as: "books",
+                include: [
                     {
-                        model : models.Book,
-                        as : "book"
+                        model: models.Book,
+                        as: "book"
                     }
                 ]
             },
             {
                 model: models.Category,
-                as : "categories",
-                required:false,
-                include : [{
+                as: "categories",
+                required: false,
+                include: [{
                     model: models.Video,
-                    as : "videos"
+                    as: "videos"
                 }]
             }
         ]
     }
 }
 
-module.exports = { All , One }
+module.exports = { All, One }

@@ -1,26 +1,27 @@
 
 const models = require("../../models");
 const ModelValidation = require("../../helpers/Validations/ModelValidation");
-const {extractKeys} = require("../../helpers/HelperMethods");
-const { All , One } = require("./Shapes");
+const { extractKeys } = require("../../helpers/HelperMethods");
+const { All, One } = require("./Shapes");
 class CourseRepository {
   static async create(data) {
     const transaction = await models.sequelize.transaction();
     const modelValidate = new ModelValidation(models.Course);
     modelValidate.ModelKeysValidate(data, ["discount"]);
-    const record = await models.Course.create(data , {transaction});
-    return [record , transaction];
+    const record = await models.Course.create(data, { transaction });
+    return [record, transaction];
   }
 
   static async getAll(data) {
-    const [country,p , dash] = extractKeys(data,["country" , "p" , "dash"])
-
-    return await models.Course.findAll({ where : data , ...All(models , !p ? country : null , !!dash) });
+    const [country, p, dash] = extractKeys(data, ["country", "p", "dash"])
+    const datawithoutAdmin = { ...data }
+    delete datawithoutAdmin.admin
+    return await models.Course.findAll({ where: datawithoutAdmin, ...All(models, !p ? country : null, !!dash) });
   }
 
-  static async ById(data,id) {
-    const [country] = extractKeys(data,["country"])
-    return await models.Course.findByPk(id , { ...One(models , country) });
+  static async ById(data, id) {
+    const [country] = extractKeys(data, ["country"])
+    return await models.Course.findByPk(id, { ...One(models, country) });
   }
 
   static async update(id, data) {

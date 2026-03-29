@@ -8,13 +8,13 @@ const BookCreation = async (req, res) => {
 };
 
 const BookGetAll = async (req, res) => {
-    const servant = new BookService({country : req.country , ...req.query});
+    const servant = new BookService({ country: req.country, ...req.query, admin: req.admin });
     const records = await servant.getAll();
     res.status(200).json({ records });
 };
 
 const BookGetById = async (req, res) => {
-    const servant = new BookService({country : req.country}, req.params.id);
+    const servant = new BookService({ country: req.country, admin: req.admin }, req.params.id);
     const record = await servant.getById();
     res.status(200).json({ record });
 };
@@ -28,13 +28,20 @@ const BookUpdate = async (req, res) => {
 const BookAddPrice = async (req, res) => {
     const servant = new BookService(req.body, req.params.id);
     await servant.addPriceToBook();
-    res.status(200).json({ msg : "Price added successfully" });
+    res.status(200).json({ msg: "Price added successfully" });
+};
+
+const BookDelete = async (req, res) => {
+    const servant = new BookService(null, req.params.id);
+    await servant.delete();
+    res.status(200).json({ msg: "Book deleted successfully" });
 };
 
 module.exports = {
-  BookCreation,
-  BookGetAll,
-  BookGetById,
-  BookUpdate,
-  BookAddPrice
+    BookCreation,
+    BookGetAll,
+    BookGetById,
+    BookUpdate,
+    BookAddPrice,
+    BookDelete
 };

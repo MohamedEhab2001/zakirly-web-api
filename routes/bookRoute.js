@@ -6,7 +6,8 @@ const {
   BookGetAll,
   BookGetById,
   BookUpdate,
-  BookAddPrice
+  BookAddPrice,
+  BookDelete
 } = require("../controllers/Book");
 
 router.route("/")
@@ -18,6 +19,7 @@ router.route("/:id/prices")
 
 router.route("/:id")
   .put(BookUpdate)
+  .delete(BookDelete)
   .get(BookGetById);
 
 module.exports = router;

@@ -13,42 +13,42 @@ class CourseService extends Service {
   }
 
   async create() {
-    this._checkIfDataProvided(null , ["books" , "learnings" , "prerequests" , "prices"]);
+    this._checkIfDataProvided(null, ["books", "learnings", "prerequests", "prices"]);
     const [record, transaction] = await CourseRepo.create(this.data);
 
 
     const books = this.data.books.map(book => ({
-      book_id : book,
-      course_id : record.id
+      book_id: book,
+      course_id: record.id
     }))
 
     const learnings = this.data.learnings.map(learning => ({
       ...learning,
-      course_id : record.id
+      course_id: record.id
     }))
 
     const prerequests = this.data.prerequests.map(prerequest => ({
       ...prerequest,
-      course_id : record.id
+      course_id: record.id
     }))
 
     const prices = this.data.prices.map(price => ({
       ...price,
-      entity_id : record.id,
-      type : "course"
+      entity_id: record.id,
+      type: "course"
     }))
-    
 
-    const courseBookService = new CourseBookService(books , null , transaction);
+
+    const courseBookService = new CourseBookService(books, null, transaction);
     await courseBookService.bulkCreate();
 
-    const courseLearningService = new CourseLearningService(learnings , null , transaction);
+    const courseLearningService = new CourseLearningService(learnings, null, transaction);
     await courseLearningService.bulkCreate();
 
-    const coursePrerequestService = new CoursePrerequestService(prerequests , null , transaction);
+    const coursePrerequestService = new CoursePrerequestService(prerequests, null, transaction);
     await coursePrerequestService.bulkCreate();
 
-    const pricesService = new PricesService(prices , null , transaction);
+    const pricesService = new PricesService(prices, null, transaction);
     await pricesService.bulkCreate();
 
     await transaction.commit();
@@ -57,17 +57,21 @@ class CourseService extends Service {
   }
 
   async getAll() {
-    return await CourseRepo.getAll(this.data);
+    const records = await CourseRepo.getAll(this.data);
+    if (this.data.admin == "true") {
+      return records;
+    }
+    return records.filter(record => record.prices && record.prices.some(p => p.price > 0));
   }
 
   async getById() {
-    return await CourseRepo.ById(this.data,this.id);
+    return await CourseRepo.ById(this.data, this.id);
   }
 
   async addPriceToCourse() {
     this._checkIfDataProvided();
     this._checkIfIdProvided();
-    const pricesService = new PricesService({...this.data , entity_id : this.id , type : "course"});
+    const pricesService = new PricesService({ ...this.data, entity_id: this.id, type: "course" });
     await pricesService.create();
   }
 
